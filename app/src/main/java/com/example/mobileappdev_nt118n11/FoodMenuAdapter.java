@@ -1,6 +1,5 @@
 package com.example.mobileappdev_nt118n11;
 
-import android.content.Context;
 import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,6 @@ import java.util.List;
 public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ViewHolder> {
 
     List<FoodMenuModel> list;
-    Context context;
-
-    public FoodMenuAdapter(List<FoodMenuModel> list, Context context) {
-        this.list = list;
-        this.context = context;
-    }
 
     @NonNull
     @Override
@@ -44,7 +37,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ViewHo
         TextView name, type, price;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.food_image);
+//            image = (ImageView) itemView.findViewById(R.id.food_image);
             name = (TextView) itemView.findViewById(R.id.food_name);
             type = (TextView) itemView.findViewById(R.id.food_type);
             price = (TextView) itemView.findViewById(R.id.food_name);
