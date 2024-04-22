@@ -1,12 +1,10 @@
 package com.example.mobileappdev_nt118n11;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,9 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class SignUp extends AppCompatActivity {
-    EditText edtPhone, edtName, edtPassword,edtGmail,edtAddress;
+    EditText edtPhone, edtName, edtPassword;
     Button btnSignUp;
-    TextView txtSignIn;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -32,10 +29,7 @@ public class SignUp extends AppCompatActivity {
         edtName=(EditText) findViewById(R.id.edt_name_su);
         edtPassword=(EditText) findViewById(R.id.edt_password_su);
         edtPhone=(EditText) findViewById(R.id.edt_phone_su);
-        edtGmail=(EditText) findViewById(R.id.edt_gmail_su);
-        edtAddress=(EditText) findViewById(R.id.edt_address_su);
         btnSignUp=(Button) findViewById(R.id.btn_Sign_Up);
-        txtSignIn=(TextView)findViewById(R.id.txt_sign_in);
 
         //Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -62,11 +56,9 @@ public class SignUp extends AppCompatActivity {
                         else
                         {
                             mDialog.dismiss();
-                            User user =new User(edtName.getText().toString(),edtPassword.getText().toString(),edtGmail.getText().toString(),edtAddress.getText().toString());
+                            User user =new User(edtName.getText().toString(),edtPassword.getText().toString());
                             table_user.child(edtPhone.getText().toString()).setValue(user);
                             Toast.makeText(SignUp.this, "Sign Up Successfully !", Toast.LENGTH_SHORT).show();
-                            Intent signIn = new Intent(SignUp.this,SignIn.class);
-                            startActivity(signIn);
                             finish();
                         }
 
@@ -77,14 +69,6 @@ public class SignUp extends AppCompatActivity {
 
                     }
                 });
-            }
-        });
-
-        txtSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent signIn = new Intent(SignUp.this,SignIn.class);
-                startActivity(signIn);
             }
         });
     }
