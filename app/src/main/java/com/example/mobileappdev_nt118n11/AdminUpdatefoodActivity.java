@@ -66,7 +66,7 @@ public class AdminUpdatefoodActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         Intent intent = getIntent();
-        id = intent.getStringExtra("adminIdKey");
+        id = intent.getStringExtra("idKey");
 
         database = FirebaseDatabase.getInstance();
         database.getReference().child("Food").addListenerForSingleValueEvent(new ValueEventListener() {
