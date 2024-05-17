@@ -52,13 +52,13 @@
             android:fontFamily="sans-serif-light"
             android:layout_marginTop="10dp"/>
 
-        <Spinner
-
+        <TextView
+            android:id="@+id/tv_addfood_Type"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:id="@+id/spinner_type"
-            android:textSize="20sp" />
-
+            android:layout_height="wrap_content"
+            android:text="Bấm để chọn loại cho món ăn."
+            android:textColor="#101010"
+            android:textSize="@dimen/text_size_middle" />
 
         <TextView
             android:id="@+id/tv_addfood_price"

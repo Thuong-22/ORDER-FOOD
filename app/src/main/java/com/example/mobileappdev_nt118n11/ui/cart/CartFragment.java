@@ -109,7 +109,7 @@ public class CartFragment extends Fragment {
     public void loadTotal(ArrayList<Order> list){
         int total = 0;
         for (Order order: list)
-            total += (Integer.valueOf(order.getPrice())) * Integer.valueOf(order.getQuantity());
+            total += (Integer.parseInt(order.getPrice())) * Integer.parseInt(order.getQuantity());
 
         tvTotalPrice.setText(StrDecimalFormat(Integer.toString(total)));
     }

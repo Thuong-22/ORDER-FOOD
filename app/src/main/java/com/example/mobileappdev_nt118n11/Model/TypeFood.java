@@ -1,35 +1,27 @@
 package com.example.mobileappdev_nt118n11.Model;
 
 public class TypeFood {
-    private String Id;
-    private String Name;
+    private String Name, Id;
 
-    public TypeFood(String id, String name) {
-        Id = id;
-        Name = name;
-    }
+    public TypeFood() {}
 
     public TypeFood(String name) {
         Name = name;
     }
 
-    public TypeFood() {
+    public void setId(String code) {
+        Id = code;
     }
 
     public String getId() {
         return Id;
     }
 
-    public void setId(String id) {
-        Id = id;
+    public void setName(String name) {
+        Name = name;
     }
 
     public String getName() {
         return Name;
     }
-
-    public void setName(String name) {
-        Name = name;
-    }
 }
-
