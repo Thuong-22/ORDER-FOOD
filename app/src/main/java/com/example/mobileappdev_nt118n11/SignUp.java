@@ -15,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.chaos.view.PinView;
 import com.example.mobileappdev_nt118n11.Model.User;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -31,16 +29,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.concurrent.TimeUnit;
 
 public class SignUp extends AppCompatActivity {
-    private TextInputEditText etName, etPassword, etPhone, etEmail, etAddress, etConfirmPassword;
-    private Button btnSignUp, btnVerify;
-    private TextView tvSignIn;
-    private TextInputLayout tilPass;
+    EditText etName, etPassword, etPhone,etEmail,etAddress;
+    Button btnSignUp, btnVerify;
+    TextView tvSignIn;
     private PinView pinView;
     private FirebaseAuth mAuth;
-    private String phoneNo, pass, name, address, mail, confirmpass;
+    private String phoneNo, pass, name, address, mail;
     private String codeBySystem;
     private ProgressDialog mDialog;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -49,17 +47,15 @@ public class SignUp extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        etName= findViewById(R.id.et_signup_name);
-        etPassword= findViewById(R.id.et_signup_password);
-        etConfirmPassword= findViewById(R.id.et_signup_confirmpassword);
-        etPhone= findViewById(R.id.et_signup_phone);
-        etEmail= findViewById(R.id.et_signup_email);
-        etAddress= findViewById(R.id.et_signup_address);
-        btnSignUp= findViewById(R.id.btn_sign_up);
-        tvSignIn= findViewById(R.id.tv_signup_login);
+        etName=(EditText) findViewById(R.id.et_signup_name);
+        etPassword=(EditText) findViewById(R.id.et_signup_password);
+        etPhone=(EditText) findViewById(R.id.et_signup_phone);
+        etEmail=(EditText) findViewById(R.id.et_signup_email);
+        etAddress=(EditText) findViewById(R.id.et_signup_address);
+        btnSignUp=(Button) findViewById(R.id.btn_sign_up);
+        tvSignIn=(TextView)findViewById(R.id.tv_signup_login);
         btnVerify = findViewById(R.id.btn_signup_verify);
         pinView = findViewById(R.id.pinview_signup);
-        tilPass = findViewById(R.id.til_signup_pass);
 
         beforeSendOTP();
 
@@ -79,7 +75,6 @@ public class SignUp extends AppCompatActivity {
                 phoneNo = etPhone.getText().toString().trim();
                 name = etName.getText().toString().trim();
                 pass = etPassword.getText().toString().trim();
-                confirmpass = etConfirmPassword.getText().toString().trim();
                 address = etAddress.getText().toString().trim();
                 mail = etEmail.getText().toString().trim();
 
@@ -96,13 +91,9 @@ public class SignUp extends AppCompatActivity {
                                 mDialog.dismiss();
                                 Toast.makeText(SignUp.this, "Số điện thoại này đã được đăng ký", Toast.LENGTH_SHORT).show();
                             }
-                            else {
-                                if (pass.equals(confirmpass) == false) {
-                                    mDialog.dismiss();
-                                    Toast.makeText(SignUp.this, "Xác nhận mật khẩu không khớp", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    sendVerificationCodeToUser("+84" + phoneNo);
-                                }
+                            else
+                            {
+                                sendVerificationCodeToUser("+84" + phoneNo);
                             }
                         }
                     }
