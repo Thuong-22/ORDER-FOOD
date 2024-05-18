@@ -87,6 +87,6 @@ public class AdminFoodMenuAdapter extends RecyclerView.Adapter<AdminFoodMenuAdap
         }
     }
 
-    //Ngắt số vd: xxxxxx -> xxx,xxx
+
 
 }

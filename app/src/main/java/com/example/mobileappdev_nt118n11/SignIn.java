@@ -26,7 +26,7 @@ public class SignIn extends AppCompatActivity {
     EditText etUsername,etPassword;
     Button btnSignIn;
     TextView tvRegister, tvForgot;
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -42,7 +42,6 @@ public class SignIn extends AppCompatActivity {
     //Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference table_user =database.getReference("User");
-
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
