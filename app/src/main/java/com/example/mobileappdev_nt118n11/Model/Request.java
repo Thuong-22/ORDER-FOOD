@@ -7,20 +7,18 @@ public class Request {
     private String name;
     private String address;
     private String total;
-    private ArrayList<Order> foods;
+    private ArrayList<Order> cartList;
     private String status;
-    private String orderDate;
 
     public Request() {
     }
 
-    public Request(String phone, String name, String address, String total, ArrayList<Order> foods, String orderdate) {
+    public Request(String phone, String name, String address, String total, ArrayList<Order> cartList) {
         this.phone = phone;
         this.name = name;
         this.address = address;
         this.total = total;
-        this.foods = foods;
-        this.orderDate = orderdate;
+        this.cartList = cartList;
         this.status = "0"; //0: đơn chờ, 1: đã nhận đơn và đang giao, 2: đã hoàn
     }
 
@@ -56,6 +54,13 @@ public class Request {
         this.total = total;
     }
 
+    public ArrayList<Order> getCartList() {
+        return cartList;
+    }
+
+    public void setCartList(ArrayList<Order> cartList) {
+        this.cartList = cartList;
+    }
 
     public String getStatus() {
         return status;
@@ -63,21 +68,5 @@ public class Request {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public ArrayList<Order> getFoods() {
-        return foods;
-    }
-
-    public void setFoods(ArrayList<Order> foods) {
-        this.foods = foods;
-    }
-
-    public String getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
     }
 }

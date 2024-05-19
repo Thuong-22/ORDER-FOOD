@@ -3,6 +3,7 @@ package com.example.mobileappdev_nt118n11.Model;
 public class Food {
     private String Id;
     private String Name, Image, Descr, Price, Foodtype;
+    private int Quantity;
     public Food() {
     }
 
@@ -13,6 +14,7 @@ public class Food {
         Price = price;
         Foodtype = foodtype;
         Id = null;
+        Quantity = 0;
     }
 
 
@@ -62,6 +64,14 @@ public class Food {
 
     public void setFoodtype(String foodtype) {
         Foodtype = foodtype;
+    }
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
     }
 
 }
