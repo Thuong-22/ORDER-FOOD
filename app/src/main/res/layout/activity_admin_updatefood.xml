@@ -6,50 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".AdminUpdatefoodActivity">
 
-    <TextView
-        android:id="@+id/tv_updatefood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Chỉnh sửa món ăn"
-        android:textColor="@color/other_red"
-        android:textSize="@dimen/text_size_middle"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"
-        />
-
     <Button
         android:id="@+id/btn_uploadpicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/btn_design_r50"
-        android:backgroundTint="@color/other_red"
+        android:backgroundTint="@color/orange"
         android:text="  Lưu ảnh đã thay đổi   "
         android:textColor="@color/white"
         android:textSize="@dimen/btn_text"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_addfood"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_addfood" />
 
     <Button
         android:id="@+id/btn_deletefood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/btn_design_r50"
-        android:backgroundTint="@color/other_red"
+        android:backgroundTint="@color/orange"
         android:text="Xóa"
         android:textColor="@color/white"
         android:textSize="@dimen/btn_text"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_addfood"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_addfood" />
 
     <ImageView
         android:id="@+id/img_updatefood"
@@ -58,8 +41,7 @@
         android:src="@drawable/ic_baseline_image_24"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_updatefood"
-        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <LinearLayout
@@ -67,24 +49,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginTop="4dp"
         android:orientation="vertical"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_updatefood">
 
         <com.google.android.material.textfield.TextInputLayout
-
+            style="@style/CustomOutlineBox"
             android:id="@+id/til_updatefood_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:hint="Tên món ăn"
             app:endIconMode="clear_text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_signup_appname"
             app:startIconDrawable="@drawable/ic_baseline_fastfood_24">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -95,23 +76,29 @@
                 android:textSize="@dimen/text_size_small" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tv_updatefood_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-light"
-            android:text="Loại"
-            android:textColor="@color/orange"
-            android:textSize="@dimen/text_size_small" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_updatefood_type"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:fontFamily="sans-serif-light"-->
+<!--            android:text="Loại"-->
+<!--            android:textColor="@color/orange"-->
+<!--            android:textSize="@dimen/text_size_small" />-->
 
-        <EditText
-            android:id="@+id/et_updatefood_type"
+        <Spinner
+            android:layout_marginTop="15dp"
+            android:background="@drawable/border_spinner"
+            style="@style/CustomOutlineBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_middle" />
+            android:layout_height="55dp"
+            android:id="@+id/spinner_type_update"
+            android:textSize="20sp"
+            android:layout_marginHorizontal="24dp"
+            />
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomOutlineBox"
             android:id="@+id/til_updatefood_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,6 +120,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomOutlineBox"
             android:id="@+id/til_updatefood_descr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -159,15 +147,14 @@
         android:id="@+id/btn_updatefood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         android:background="@drawable/btn_design_r50"
-        android:backgroundTint="@color/other_red"
+        android:backgroundTint="@color/orange"
         android:text="Chỉnh sửa"
         android:textColor="@color/white"
         android:textSize="@dimen/btn_text"
         app:layout_constraintEnd_toStartOf="@+id/btn_deletefood"
         app:layout_constraintStart_toEndOf="@+id/btn_uploadpicture"
-        app:layout_constraintTop_toBottomOf="@+id/ll_addfood"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintTop_toBottomOf="@+id/ll_addfood" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -82,6 +82,7 @@
         </activity>
         <activity
             android:name=".NavigationActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
             android:exported="false"
             android:label="@string/title_activity_navigation"
             android:theme="@style/Theme.MobileAppDev_NT118N11.NoActionBar">
@@ -92,7 +93,8 @@
         <activity
             android:name=".FoodDetailActivity"
             android:exported="false" />
-        <activity android:name=".SignIn" />
+        <activity android:name=".SignIn"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".SignUp" />
         <activity
             android:name=".MainActivity"
