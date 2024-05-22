@@ -14,110 +14,87 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_baseline_person_outline_24"
-        android:layout_marginTop="20dp"
         />
 
     <LinearLayout
-        android:id="@+id/ll_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
+        android:background="@drawable/border"
         app:layout_constraintTop_toBottomOf="@id/img_profile"
+        app:layout_constraintBottom_toTopOf="@id/btn_profile_Edit"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.3"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="20dp"
         >
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_profile_name"
-            style="@style/CustomOutlineBox"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="20dp"
-            android:hint="Họ và tên"
-            app:endIconMode="clear_text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_signup_appname"
-            app:startIconDrawable="@drawable/ic_baseline_person_24">
+            android:fontFamily="sans-serif-light"
+            android:text="Name"
+            android:textColor="@color/light_orange"
+            android:textSize="@dimen/text_size_small" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_profile_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:textSize="@dimen/text_size_small" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_profile_phone"
-            style="@style/CustomOutlineBox"
+        <EditText
+            android:id="@+id/tv_profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="10dp"
-            android:hint="Số điện thoại"
-            app:endIconMode="clear_text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_signup_appname"
-            app:startIconDrawable="@drawable/ic_baseline_phone_24_gray">
+            android:text="Truc Anh"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_middle" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_profile_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:textSize="@dimen/text_size_small" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_profile_email"
-            style="@style/CustomOutlineBox"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="10dp"
-            android:hint="Email"
-            app:endIconMode="clear_text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_signup_appname"
-            app:startIconDrawable="@drawable/fui_ic_mail_white_24dp">
+            android:fontFamily="sans-serif-light"
+            android:text="Số điện thoại"
+            android:textColor="@color/light_orange"
+            android:textSize="@dimen/text_size_small" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_profile_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:textSize="@dimen/text_size_small" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_profile_address"
-            style="@style/CustomOutlineBox"
+        <TextView
+            android:id="@+id/tv_profile_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="10dp"
-            android:hint="Địa chỉ"
-            app:endIconMode="clear_text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_signup_appname"
-            app:startIconDrawable="@drawable/ic_baseline_location_on_24">
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_middle"
+            android:text="0123456789"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_profile_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:textSize="@dimen/text_size_small" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/light_orange"
+            android:textSize="@dimen/text_size_small"
+            android:text="Email"/>
 
+        <EditText
+            android:id="@+id/tv_profile_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_middle"
+            android:text="trucanh@gmail.com"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/light_orange"
+            android:textSize="@dimen/text_size_small"
+            android:text="Địa chỉ"/>
+
+        <EditText
+            android:id="@+id/tv_profile_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TP HCM"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
     </LinearLayout>
 
     <Button
@@ -132,10 +109,10 @@
         android:textSize="@dimen/btn_text"
         app:layout_constraintWidth_percent=".7"
         android:paddingHorizontal="10dp"
-        app:layout_constraintTop_toBottomOf="@id/ll_profile"
+        app:layout_constraintBottom_toTopOf="@id/btn_profile_ChangePass"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:id="@+id/btn_profile_ChangePass"
@@ -148,9 +125,9 @@
         android:text="Đổi mật khẩu"
         android:textSize="@dimen/btn_text"
         android:paddingHorizontal="10dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_profile_Edit"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="180dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
