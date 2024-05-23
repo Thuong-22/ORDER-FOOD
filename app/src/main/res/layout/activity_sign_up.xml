@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+
     <TextView
         android:id="@+id/tv_signup_appname"
         android:layout_width="wrap_content"
@@ -13,7 +13,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/lobster"
         android:text="@string/name"
-        android:textColor="@color/orange"
+        android:textColor="@color/orange2"
         android:textSize="40sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -38,7 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/text_size_small"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -160,7 +161,7 @@
         android:text="ĐĂNG KÝ"
         android:textSize="@dimen/btn_text"
         android:textColor="@color/white"
-        app:backgroundTint="@color/orange"
+        app:backgroundTint="@color/orange2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -172,7 +173,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Đăng nhập"
-        android:textColor="@color/orange"
+        android:textColor="@color/orange2"
         android:textSize="@dimen/text_size_small"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -196,7 +197,7 @@
         app:itemHeight="50dp"
         app:itemRadius="5dp"
         app:itemWidth="50dp"
-        app:lineColor="@color/orange"
+        app:lineColor="@color/orange2"
         app:lineWidth="1dp"
         app:layout_constraintBottom_toTopOf="@id/btn_signup_verify"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -213,7 +214,7 @@
         android:text="@string/button_verify"
         android:textSize="@dimen/btn_text"
         android:textColor="@color/white"
-        app:backgroundTint="@color/orange"
+        app:backgroundTint="@color/orange2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

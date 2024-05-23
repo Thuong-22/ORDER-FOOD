@@ -3,15 +3,17 @@ package com.example.mobileappdev_nt118n11.Model;
 public class Food {
     private String Id;
     private String Name, Image, Descr, Price, Foodtype;
+    boolean IsFavourite;
     public Food() {
     }
 
-    public Food(String name, String image, String descr, String price, String foodtype) {
+    public Food(String name, String image, String descr, String price, String foodtype, Boolean IsFavoutite) {
         Name = name;
         Image = image;
         Descr = descr;
         Price = price;
         Foodtype = foodtype;
+        IsFavourite = false;
         Id = null;
     }
 
@@ -62,6 +64,13 @@ public class Food {
 
     public void setFoodtype(String foodtype) {
         Foodtype = foodtype;
+    }
+    public Boolean getIsFavourite() {
+        return IsFavourite;
+    }
+
+    public void setIsFavourite(Boolean isFavourite) {
+        IsFavourite = isFavourite;
     }
 
 }

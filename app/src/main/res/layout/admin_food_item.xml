@@ -47,6 +47,7 @@
                     android:padding="5dp"
                     android:singleLine="true"
                     android:text="4.0"
+                    android:fontFamily="@font/poppins"
                     android:textColor="@color/dark_gray"
                     android:textSize="16sp"/>
                 <ImageView
@@ -105,8 +106,9 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="Name"
+                android:fontFamily="@font/poppins"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/Layout_rate"
@@ -139,6 +141,7 @@
                     android:layout_marginStart="2dp"
                     android:gravity="center_vertical"
                     android:text="Phở"
+                    android:fontFamily="@font/poppins"
                     android:textColor="@color/medium_gray"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -160,6 +163,7 @@
                     android:layout_height="match_parent"
                     android:gravity="top"
                     android:text="120.000"
+                    android:fontFamily="@font/poppins"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
 

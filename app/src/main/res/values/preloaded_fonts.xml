@@ -4,5 +4,7 @@
         <item>@font/amarante</item>
         <item>@font/amita</item>
         <item>@font/lobster</item>
+        <item>@font/poppins</item>
+        <item>@font/poppins_medium</item>
     </array>
 </resources>

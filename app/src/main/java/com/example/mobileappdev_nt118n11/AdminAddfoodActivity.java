@@ -242,7 +242,8 @@ public class AdminAddfoodActivity extends AppCompatActivity {
                                     Random random=new Random();
                                     int number = random.nextInt();
                                     String IDFood = String.valueOf(number);
-                                    newFood = new Food(edName.getText().toString(),uri.toString(),edDecription.getText().toString(),edPrice.getText().toString(),Type);
+                                    Type = typeAdapter.getItem(spnType.getSelectedItemPosition()).getName();
+                                    newFood = new Food(edName.getText().toString(),uri.toString(),edDecription.getText().toString(),edPrice.getText().toString(),Type, false);
 
                                     food.child(IDFood).setValue(newFood);
                                     Intent Management = new Intent(AdminAddfoodActivity.this,ManagementActivity.class);

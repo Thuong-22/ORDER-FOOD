@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -50,9 +51,14 @@ public class NavigationActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_search:
-                Intent SearchActivity = new Intent(getBaseContext(), com.example.mobileappdev_nt118n11.SearchActivity.class);
-                SearchActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(SearchActivity);
+//                try {
+                    Intent SearchActivity = new Intent(getBaseContext(), com.example.mobileappdev_nt118n11.SearchActivity.class);
+                    SearchActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(SearchActivity);
+//                } catch (Exception e) {
+//                    Log.e("Error", e.toString());
+//                }
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
