@@ -69,6 +69,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 Intent ChangePass = new Intent(getActivity(), ChangePasswordActivity.class);
                 startActivity(ChangePass);
+                getActivity().finish();
             }
         });
         return root;
