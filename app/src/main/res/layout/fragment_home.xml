@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/amita"
         android:text="Món phổ biến cho bạn"
         android:textColor="@color/light_orange"
         android:textSize="25sp"

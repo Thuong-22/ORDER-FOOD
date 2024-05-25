@@ -84,6 +84,7 @@ public class HomeFragment extends Fragment {
 
             database = FirebaseDatabase.getInstance();
             DatabaseReference favouriteRef = database.getReference().child("Favourite").child(Phone.getKey_Phone());
+            Log.d("Database", "CURENT USER PHONE: "+ Phone.getKey_Phone());
 
 //            foodList = database.getReference("Foods");
             database.getReference().child("Food").addListenerForSingleValueEvent(new ValueEventListener() {

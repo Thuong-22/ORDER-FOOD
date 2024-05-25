@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,18 +17,24 @@ import com.example.mobileappdev_nt118n11.Database.Database;
 import com.example.mobileappdev_nt118n11.Model.Food;
 import com.example.mobileappdev_nt118n11.Model.Order;
 import com.example.mobileappdev_nt118n11.ui.profile.Phone;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class FoodDetailActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
+    Database localDB;
     ImageView ivImageDetail;
+    FloatingActionButton btnFavourite;
     TextView tvNameDetail, tvTypeDetail, tvPriceDetail, tvDescrDetail;
     Food foodDetail;
     Button btnCart;
@@ -44,20 +52,26 @@ public class FoodDetailActivity extends AppCompatActivity {
         tvTypeDetail = (TextView) findViewById(R.id.food_type_detail);
         tvPriceDetail = (TextView) findViewById(R.id.food_price_detail);
         tvDescrDetail = (TextView) findViewById(R.id.food_description_detail);
+        btnFavourite = (FloatingActionButton) findViewById(R.id.btn_add_to_favourite);
 
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("idKey");
 
+        localDB = new Database(this);
+
         //Log.i("Key in food detail",id);
 
         database = FirebaseDatabase.getInstance();
+        DatabaseReference favouriteRef = database.getReference().child("Favourite").child(Phone.getKey_Phone());
         database.getReference().child("Food").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     if (id.equals(dataSnapshot.getKey().toString())) {
                         foodDetail = dataSnapshot.getValue(Food.class);
+                        foodDetail.setId(id);
+                        Log.d("Databse", "FoodDetail.ID() in init: " + foodDetail.getId() + " " + foodDetail.getName());
 //                        Log.i("Check", "get into compare");
 //                        Log.i("Name", foodDetail.getName().toString());
 //                        Log.i("Price", foodDetail.getPrice().toString());
@@ -69,6 +83,62 @@ public class FoodDetailActivity extends AppCompatActivity {
                         tvTypeDetail.setText(foodDetail.getFoodtype());
                         tvPriceDetail.setText(getDecimalFormattedString(foodDetail.getPrice()));
                         tvDescrDetail.setText(foodDetail.getDescr());
+
+                        //Kiem tra xem mon an nay user co thich ko
+                        favouriteRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists() && localDB.isFavorites_new(id, Phone.getKey_Phone())) {
+                                    // Nếu tồn tại trong Favourite, đánh dấu là IsFavourite = true
+                                    foodDetail.setIsFavourite(true);
+                                    btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24_fill);
+                                } else {
+                                    // Nếu không tồn tại trong Favourite, đánh dấu là IsFavourite = false
+                                    foodDetail.setIsFavourite(false);
+                                    btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24);
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Log.e("Firebase", "Error checking favourite status: " + error.getMessage());
+                            }
+                        });
+
+                        btnFavourite.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (foodDetail.getIsFavourite()) {
+                                    Log.d("Databse", "FoodDetail.ID(): " + foodDetail.getId());
+                                    //Xóa khỏi favorites trong localDB
+                                    localDB.removeToFavorites(foodDetail.getId(), Phone.getKey_Phone());
+                                    //Xóa khỏi favourite trong firebase
+                                    favouriteRef.child(foodDetail.getId()).removeValue();
+
+                                    Log.d("Database", "Call func: removed favorite for foodId: " + foodDetail.getId());
+
+                                    foodDetail.setIsFavourite(false);
+                                    btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24);
+                                } else {
+                                    Log.d("Databse", "FoodDetail.ID(): " + foodDetail.getId());
+                                    // Thêm vào favorites
+                                    localDB.addToFavorites(foodDetail.getId(), Phone.getKey_Phone());
+                                    //Thêm vào favourite trong firebase
+                                    Map<String, Object> favData = new HashMap<>();
+                                    favData.put("descr", foodDetail.getDescr());
+                                    favData.put("foodtype", foodDetail.getFoodtype());
+                                    favData.put("image", foodDetail.getImage());
+                                    favData.put("name", foodDetail.getName());
+                                    favData.put("price", foodDetail.getPrice());
+
+                                    favouriteRef.child(foodDetail.getId()).setValue(favData);
+                                    Log.d("Database", "Call func: add favorite for foodId: " + foodDetail.getId());
+
+                                    foodDetail.setIsFavourite(true);
+                                    btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24_fill);
+                                }
+                            }
+                        });
+
                     }
                 }
             }

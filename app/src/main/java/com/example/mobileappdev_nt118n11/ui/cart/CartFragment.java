@@ -116,7 +116,6 @@ public class CartFragment extends Fragment {
             }
         });
 
-
         loadCartFood();
         loadTotal(cartList);
         return root;

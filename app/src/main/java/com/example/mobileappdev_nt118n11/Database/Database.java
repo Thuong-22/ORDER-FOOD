@@ -11,6 +11,7 @@ import com.example.mobileappdev_nt118n11.Model.Order;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Database extends SQLiteAssetHelper {
     private static final String DB_NAME="LocalFoodDB.db";
@@ -161,8 +162,16 @@ public class Database extends SQLiteAssetHelper {
         return result;
     }
 
-
-
-
-
+    public List<String> getAllFavourites(String userPhone) {
+        List<String> favouriteList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT FoodId FROM Favorites WHERE UserPhone=?", new String[]{userPhone});
+        if (cursor.moveToFirst()) {
+            do {
+                favouriteList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return favouriteList;
+    }
 }
