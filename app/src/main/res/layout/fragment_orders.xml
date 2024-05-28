@@ -17,12 +17,12 @@
             android:id="@+id/tbi_unpaid"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/menu_unpaid" />
+            android:text="Đơn chưa giao" />
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tbi_paid"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/menu_paid" />
+            android:text="Đơn đã giao" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2

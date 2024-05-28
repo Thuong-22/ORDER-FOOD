@@ -5,12 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".fragments.PaidFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_paid_orders"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/menu_paid"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:textStyle="bold"/>
+        android:padding="8dp"
+        android:layout_marginTop="48dp"/>
 
 </FrameLayout>

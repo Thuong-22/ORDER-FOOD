@@ -3,6 +3,7 @@ package com.example.mobileappdev_nt118n11.Model;
 import java.util.ArrayList;
 
 public class Request {
+    private String requestId;
     private String phone;
     private String name;
     private String address;
@@ -24,6 +25,13 @@ public class Request {
         this.status = "0"; //0: đơn chờ, 1: đã nhận đơn và đang giao, 2: đã hoàn
     }
 
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String id) {
+        this.requestId = id;
+    }
     public String getPhone() {
         return phone;
     }
