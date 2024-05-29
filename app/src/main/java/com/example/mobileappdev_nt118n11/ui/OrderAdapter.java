@@ -12,8 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 //import com.example.mobileappdev_nt118n11.FoodDetailActivity;
+import com.example.mobileappdev_nt118n11.AdminDetailOrderActivity;
 import com.example.mobileappdev_nt118n11.Model.Request;
 import com.example.mobileappdev_nt118n11.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -54,10 +59,31 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.btnViewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(context, AdminDetailOrderActivity.class);
-//                intent.putExtra("idKey", request.getRequestId());
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                context.startActivity(intent);
+                Intent intent = new Intent(context, AdminDetailOrderActivity.class);
+                intent.putExtra("idKey", request.getRequestId());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+
+        holder.btnDelivered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference()
+                        .child("Request").child(request.getRequestId()).child("status");
+                orderRef.setValue("1").addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // Update local UI (optional): change status text or hide button
+                            holder.tvStatus.setText("Completed");
+                            holder.btnDelivered.setVisibility(View.GONE);
+                        } else {
+                            // Handle failed update
+                            // You can show an error toast or log the error
+                        }
+                    }
+                });
             }
         });
     }

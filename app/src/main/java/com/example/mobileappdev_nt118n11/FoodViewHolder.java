@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-    ImageView item_image,fav_image;
+    ImageView item_image,
+            fav_image;
     TextView item_name, item_type, item_price;
     public FoodViewHolder(@NonNull View itemView) {
         super(itemView);

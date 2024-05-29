@@ -104,6 +104,7 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onSearchConfirmed(CharSequence text) {
+                Log.w("Call Func", "Call Funct onSearchConfirmed with startSearch, text: " + text);
                 startSearch(text);
             }
 
@@ -115,48 +116,94 @@ public class SearchActivity extends AppCompatActivity {
 
         loadMenu();
     }
-    //tìm món với từ khóa text
+    // Tìm món với từ khóa text
     private void startSearch(CharSequence text) {
-        Query searchByName = dbRefFoodMenu.orderByChild("Name").equalTo(text.toString());
+        Log.d("D", "On Call startSearch func: " + text.toString());
+        String searchText = text.toString();
+//                .toLowerCase();
 
-        FirebaseRecyclerOptions<Food> foodOption = new FirebaseRecyclerOptions.Builder<Food>()
-                .setQuery(searchByName,Food.class)
-                .build();
-        searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(foodOption) {
+        // Tạo truy vấn để tìm kiếm theo tên
+        Query searchByName = FirebaseDatabase.getInstance().getReference("Food")
+                .orderByChild("Name")
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff");
+
+        // Kiểm tra truy vấn có trả về kết quả không
+        searchByName.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Log.d("D", "Query returned results");
+                } else {
+                    Log.d("D", "Query returned no results");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("D", "Query failed: " + error.getMessage());
+            }
+        });
+
+        FirebaseRecyclerOptions<Food> options =
+                new FirebaseRecyclerOptions.Builder<Food>()
+                        .setQuery(searchByName, Food.class)
+                        .build();
+
+        // Dừng adapter hiện tại nếu đang lắng nghe
+        if (menuAdapter != null) {
+            menuAdapter.stopListening();
+        }
+
+        // Tạo mới adapter để hiển thị kết quả tìm kiếm
+        searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull FoodViewHolder holder, int position, @NonNull Food model) {
-                final Food foodModel = model;
-                final String key = searchAdapter.getRef(position).getKey();
-                Picasso.get().load(foodModel.getImage()).placeholder(R.drawable.background).into(holder.item_image);
-                holder.item_name.setText(foodModel.getName());
-                holder.item_type.setText(foodModel.getFoodtype());
-                holder.item_price.setText(StrDecimalFormat(foodModel.getPrice()));
+                Log.d("D", "On Call searchAdapter func: onBindViewHolder, option: " + options.toString());
+                final String key = getRef(position).getKey(); // Lấy key của item hiện tại
+                Picasso.get().load(model.getImage()).placeholder(R.drawable.background).into(holder.item_image);
+                holder.item_name.setText(model.getName());
+                holder.item_type.setText(model.getFoodtype());
+                holder.item_price.setText(StrDecimalFormat(model.getPrice()));
 
+                // Xử lý sự kiện khi người dùng nhấp vào item
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        // Chuyển sang màn hình chi tiết món ăn
                         Intent intent = new Intent(SearchActivity.this, FoodDetailActivity.class);
                         intent.putExtra("idKey", key);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
                 });
             }
+
             @NonNull
             @Override
             public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item,parent,false);
-                    return new FoodViewHolder(view);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item, parent, false);
+                return new FoodViewHolder(view);
             }
         };
+
+        // Bắt đầu lắng nghe sự kiện
         searchAdapter.startListening();
-        rcvFoodList.setAdapter(searchAdapter);
+        rcvFoodList.setAdapter(searchAdapter); // Hiển thị kết quả lên RecyclerView
     }
-    // tải menu khi mới mở giao diện search
-    private void loadMenu(){
+
+
+
+    private void loadMenu() {
         FirebaseRecyclerOptions<Food> option = new FirebaseRecyclerOptions.Builder<Food>()
-                .setQuery(dbRefFoodMenu,Food.class)
+                .setQuery(dbRefFoodMenu, Food.class)
                 .build();
+
+        // Dừng nghe searchAdapter (nếu có)
+        if (searchAdapter != null) {
+            searchAdapter.stopListening();
+        }
+
+        // Bắt đầu nghe menuAdapter
         menuAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(option) {
             @Override
             protected void onBindViewHolder(@NonNull FoodViewHolder holder, int position, @NonNull Food model) {
@@ -166,25 +213,6 @@ public class SearchActivity extends AppCompatActivity {
                 holder.item_name.setText(foodModel.getName());
                 holder.item_type.setText(foodModel.getFoodtype());
                 holder.item_price.setText(StrDecimalFormat(foodModel.getPrice()));
-                ///add favorite
-//                if(localDB.isFavorites(menuAdapter.getRef(position).getKey(), Phone.getKey_Phone())){
-//                    holder.fav_image.setImageResource(R.drawable.ic_baseline_favorite_24);
-//                }
-                ///////Click button tym
-                holder.fav_image.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (!localDB.isFavorites(menuAdapter.getRef(position).getKey(), Phone.getKey_Phone())) {
-                            localDB.addToFavorites(menuAdapter.getRef(position).getKey(), Phone.getKey_Phone());
-                            holder.fav_image.setImageResource(R.drawable.ic_baseline_favorite_24);
-                            Toast.makeText(getBaseContext(), "" + foodModel.getName() + "was added to Favorites", Toast.LENGTH_SHORT).show();
-                        } else {
-                            localDB.addToFavorites(menuAdapter.getRef(position).getKey(), Phone.getKey_Phone());
-                            holder.fav_image.setImageResource(R.drawable.ic_baseline_favorite_24);
-                            Toast.makeText(getBaseContext(), "" + foodModel.getName() + "was removed from Favorites", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -200,10 +228,11 @@ public class SearchActivity extends AppCompatActivity {
             @NonNull
             @Override
             public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item, parent, false);
                 return new FoodViewHolder(view);
             }
         };
+
         menuAdapter.startListening();
         rcvFoodList.setAdapter(menuAdapter);
     }

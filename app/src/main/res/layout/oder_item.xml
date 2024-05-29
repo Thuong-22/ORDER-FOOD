@@ -199,7 +199,7 @@
             android:textSize="15sp"
             android:fontFamily="@font/poppins"
             android:textColor="@android:color/white"
-            android:backgroundTint="@color/other_red2" />
+            android:backgroundTint="@color/orange2" />
     </LinearLayout>
 
 </LinearLayout>
