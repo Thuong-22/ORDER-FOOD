@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
 
 import com.example.mobileappdev_nt118n11.Model.User;
 import com.example.mobileappdev_nt118n11.ui.profile.Phone;
@@ -25,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 public class SignIn extends AppCompatActivity {
     EditText etUsername,etPassword;
     Button btnSignIn;
-    TextView tvRegister, tvForgot;
+    TextView tvRegister;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,7 +36,6 @@ public class SignIn extends AppCompatActivity {
         etUsername =(EditText) findViewById(R.id.et_signin_username);
         btnSignIn=(Button) findViewById(R.id.btn_Sign_In);
         tvRegister=(TextView)findViewById(R.id.tv_signin_register);
-        tvForgot = findViewById(R.id.tv_signin_forgot);
 
     //Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -69,7 +67,6 @@ public class SignIn extends AppCompatActivity {
                                     Intent Home = new Intent(SignIn.this,NavigationActivity.class);
                                     Phone.Key_Phone=etUsername.getText().toString().trim();
                                     startActivity(Home);
-                                    finish();
                                 } else
                                     Toast.makeText(SignIn.this, "Sign in Faile !", Toast.LENGTH_SHORT).show();
                             }
@@ -93,14 +90,6 @@ public class SignIn extends AppCompatActivity {
             public void onClick(View view) {
                 Intent signUp = new Intent(SignIn.this,SignUp.class);
                 startActivity(signUp);
-            }
-        });
-
-        tvForgot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SignIn.this,ForgotPassword.class);
-                startActivity(intent);
             }
         });
    }
