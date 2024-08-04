@@ -13,6 +13,7 @@
         android:orientation="vertical"
         android:layout_centerInParent="true">
 
+
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -58,5 +59,9 @@
             android:layout_margin="8dp"
             android:shadowColor="@color/black"
             />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </RelativeLayout>
+
