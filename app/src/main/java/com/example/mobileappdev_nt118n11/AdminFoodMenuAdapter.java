@@ -1,5 +1,7 @@
 package com.example.mobileappdev_nt118n11;
 
+import static com.example.mobileappdev_nt118n11.FoodMenuAdapter.StrDecimalFormat;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -19,12 +21,12 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ViewHolder> {
+public class AdminFoodMenuAdapter extends RecyclerView.Adapter<AdminFoodMenuAdapter.ViewHolder> {
 
     ArrayList<Food> list;
     Context context;
 
-    public FoodMenuAdapter(ArrayList<Food> list, Context context) {
+    public AdminFoodMenuAdapter(ArrayList<Food> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -33,13 +35,13 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_food_item,parent,false);
 
         return new ViewHolder(view) ;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodMenuAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdminFoodMenuAdapter.ViewHolder holder, int position) {
 
         DecimalFormat decFormat = new DecimalFormat("###,###,###");
         Food foodModel = list.get(position);
@@ -55,7 +57,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ViewHo
 
                 }
                 else{
-                    Intent intent = new Intent(context, FoodDetailActivity.class);
+                    Intent intent = new Intent(context, AdminUpdatefoodActivity.class);
                     intent.putExtra("idKey", foodModel.getId());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
@@ -85,40 +87,5 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ViewHo
     }
 
     //Ngắt số vd: xxxxxx -> xxx,xxx
-    public static String StrDecimalFormat(String value)
-    {
-        StringTokenizer lst = new StringTokenizer(value, ".");
-        String str1 = value;
-        String str2 = "";
-        if (lst.countTokens() > 1)
-        {
-            str1 = lst.nextToken();
-            str2 = lst.nextToken();
-        }
-        String str3 = "";
-        int i = 0;
-        int j = -1 + str1.length();
-        if (str1.charAt( -1 + str1.length()) == '.')
-        {
-            j--;
-            str3 = ".";
-        }
-        for (int k = j;; k--)
-        {
-            if (k < 0)
-            {
-                if (str2.length() > 0)
-                    str3 = str3 + "." + str2;
-                return str3;
-            }
-            if (i == 3)
-            {
-                str3 = "." + str3;
-                i = 0;
-            }
-            str3 = str1.charAt(k) + str3;
-            i++;
-        }
 
-    }
 }
