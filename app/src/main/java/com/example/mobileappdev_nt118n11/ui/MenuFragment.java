@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.mobileappdev_nt118n11.AdminAddfoodActivity;
-import com.example.mobileappdev_nt118n11.AdminFoodMenuAdapter;
 import com.example.mobileappdev_nt118n11.FoodMenuAdapter;
 import com.example.mobileappdev_nt118n11.Model.Food;
 import com.example.mobileappdev_nt118n11.R;
@@ -39,7 +38,7 @@ public class MenuFragment extends Fragment {
     ArrayList<Food> recyclerFoodList;
     FirebaseDatabase database;
     EditText etSearch;
-    AdminFoodMenuAdapter recyclerAdapter;
+    FoodMenuAdapter recyclerAdapter;
     FloatingActionButton btn_addfood;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class MenuFragment extends Fragment {
             btn_addfood=(FloatingActionButton)root.findViewById(R.id.btn_add_food) ;
 
             recyclerFoodList = new ArrayList<>();
-            recyclerAdapter = new AdminFoodMenuAdapter(recyclerFoodList, getActivity().getApplicationContext());
+            recyclerAdapter = new FoodMenuAdapter(recyclerFoodList, getActivity().getApplicationContext());
 
             rcvFoodList = (RecyclerView) root.findViewById(R.id.rcv_admin_menu);
 

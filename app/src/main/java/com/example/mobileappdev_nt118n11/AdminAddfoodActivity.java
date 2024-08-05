@@ -9,8 +9,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +26,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.io.IOException;
 import java.util.Random;
 import java.util.UUID;
@@ -35,8 +35,7 @@ import java.util.UUID;
 public class AdminAddfoodActivity extends AppCompatActivity {
 
 
-    private EditText edName,edPrice,edDecription;
-    private TextView tvType;
+    private EditText edName, edType,edPrice,edDecription;
     private ImageView imgPicture;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
@@ -53,7 +52,7 @@ public class AdminAddfoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_addfood);
 
         edName=(EditText) findViewById(R.id.et_addfood_name);
-        tvType=(TextView) findViewById(R.id.tv_addfood_Type);
+        edType=(EditText) findViewById(R.id.et_addfood_type);
         edPrice=(EditText) findViewById(R.id.et_addfood_price);
         edDecription=(EditText) findViewById(R.id.et_addfood_descr);
         imgPicture=(ImageView) findViewById(R.id.img_addfood);
@@ -80,7 +79,6 @@ public class AdminAddfoodActivity extends AppCompatActivity {
         });
 
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -119,8 +117,7 @@ public class AdminAddfoodActivity extends AppCompatActivity {
                                     Random random=new Random();
                                     int number = random.nextInt();
                                     String IDFood = String.valueOf(number);
-                                    newFood = new Food(edName.getText().toString(),uri.toString(),edDecription.getText().toString(),edPrice.getText().toString(),"Đồ ăn");
-
+                                    newFood = new Food(edName.getText().toString(),uri.toString(),edDecription.getText().toString(),edPrice.getText().toString(),edType.getText().toString());
                                     food.child(IDFood).setValue(newFood);
                                     Intent Management = new Intent(AdminAddfoodActivity.this,ManagementActivity.class);
                                     startActivity(Management);
